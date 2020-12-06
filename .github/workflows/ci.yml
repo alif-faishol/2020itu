@@ -5,6 +5,7 @@ on:
     branches: [ main ]
   pull_request:
     branches: [ main ]
+  workflow_dispatch:
 
 jobs:
   test:
@@ -78,8 +79,6 @@ jobs:
 
       - name: Install dependencies 👨🏻‍💻
         run: yarn install
-        env:
-          NODE_ENV: production
 
       - name: Setup environment
         run: |
