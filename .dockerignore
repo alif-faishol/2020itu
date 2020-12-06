@@ -1,6 +1,6 @@
-*
-!.next
+/*
+!/.next
 !package.json
 !yarn.lock
-!public
+!/public
 !.env.local
