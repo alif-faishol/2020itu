@@ -78,6 +78,8 @@ jobs:
 
       - name: Install dependencies 👨🏻‍💻
         run: yarn install
+        env:
+          NODE_ENV: production
 
       - name: Setup environment
         run: |
