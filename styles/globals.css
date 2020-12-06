@@ -120,6 +120,8 @@ body {
 }
 
 .button {
+  display: inline-block;
+  text-align: center;
   background-color: yellow;
   border: none;
   padding: 4px 24px;
@@ -228,6 +230,8 @@ body {
 }
 .modal-content {
   position: absolute;
+  margin: 0 auto;
+  max-width: 500px;
   top: 50%;
   left: 16px;
   right: 16px;

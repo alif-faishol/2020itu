@@ -5,7 +5,13 @@ import { useRouter } from 'next/router';
 import styles from '@styles/Home.module.css';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { toBlob } from 'html-to-image';
-import { OrderedListOutlined, ShareAltOutlined } from '@ant-design/icons';
+import {
+  FacebookFilled,
+  OrderedListOutlined,
+  ShareAltOutlined,
+  TwitterOutlined,
+  WhatsAppOutlined,
+} from '@ant-design/icons';
 import WordRain from '@components/WordRain';
 
 type ResultPageProps = {
@@ -21,13 +27,18 @@ const ResultPage: NextPage<ResultPageProps> = ({ word }) => {
   const [mode, setMode] = useState<'normal' | 'square' | 'story'>('normal');
   const [modal, setModal] = useState<'share' | 'graph'>();
 
+  const canShare = typeof window !== 'undefined' && navigator.share;
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
-  const canShareImage = typeof window !== 'undefined' && navigator.canShare;
+  const canShareImage = canShare && navigator.canShare;
 
   const onShare = useCallback((type: 'square' | 'story') => {
     if (!shareableRef.current) return;
     setMode(type);
+  }, []);
+
+  const onUrlShare = useCallback(() => {
+    navigator.share({ url: window.location.href, text: `#2020itu ${word}` });
   }, []);
 
   useEffect(() => {
@@ -146,19 +157,58 @@ const ResultPage: NextPage<ResultPageProps> = ({ word }) => {
                 className="text-subtitle"
                 style={{ fontSize: 12, color: 'red', marginBottom: 8, textAlign: 'left' }}
               >
-                Browser tidak mendukung berbagi gambar
+                Browser tidak mendukung sharing gambar
               </div>
             )}
-            <button className="share-option">
-              <div className="share-option-title">URL</div>
-              <div className="share-option-subtitle">Link ke halaman ini</div>
-            </button>
+            {canShare ? (
+              <button className="share-option" onClick={onUrlShare}>
+                <div className="share-option-title">URL</div>
+                <div className="share-option-subtitle">Link ke halaman ini</div>
+              </button>
+            ) : (
+              <div className="share-option">
+                <div className="share-option-title">URL</div>
+                <div className="share-option-subtitle">Link ke halaman ini</div>
+                <div style={{ marginTop: 8 }}>
+                  <a
+                    target="__blank"
+                    href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
+                      window.location.href
+                    )}`}
+                    className="button hide-when-share"
+                    style={{ padding: 8, width: 48, height: 48 }}
+                  >
+                    <FacebookFilled />
+                  </a>
+                  <a
+                    target="__blank"
+                    href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(
+                      window.location.href
+                    )}&text=${encodeURIComponent(`#2020itu ${word}`)}`}
+                    className="button hide-when-share"
+                    style={{ marginLeft: 8, padding: 8, width: 48, height: 48 }}
+                  >
+                    <TwitterOutlined />
+                  </a>
+                  <a
+                    target="__blank"
+                    href={`https://wa.me/?text=${encodeURIComponent(
+                      `#2020itu ${word} ${window.location.href}`
+                    )}`}
+                    className="button hide-when-share"
+                    style={{ marginLeft: 8, padding: 8, width: 48, height: 48 }}
+                  >
+                    <WhatsAppOutlined />
+                  </a>
+                </div>
+              </div>
+            )}
           </div>
         )}
         {modal === 'graph' && (
           <div className="modal-content" style={{ paddingTop: 0 }}>
             <h1 className="text-subtitle" style={{ color: 'black', fontSize: 24 }}>
-              Kata Populer
+              Respon Populer
             </h1>
             <div
               style={{
