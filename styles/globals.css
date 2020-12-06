@@ -14,3 +14,253 @@ a {
 * {
   box-sizing: border-box;
 }
+
+body {
+  font-family: Helvetica, sans-serif;
+}
+
+.react-autosuggest__container {
+  position: relative;
+}
+
+.react-autosuggest__input {
+  text-align: center;
+  width: 320px;
+  padding: 10px 20px;
+  font-family: 'Roboto Slab', serif;
+  font-weight: normal;
+  font-size: 42px;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  color: yellow;
+  border-bottom: 1px solid white;
+}
+
+.react-autosuggest__input::-webkit-input-placeholder {
+   text-align: center;
+}
+
+.react-autosuggest__input:-moz-placeholder { /* Firefox 18- */
+   text-align: center;  
+}
+
+.react-autosuggest__input::-moz-placeholder {  /* Firefox 19+ */
+   text-align: center;  
+}
+
+.react-autosuggest__input:-ms-input-placeholder {  
+   text-align: center; 
+}
+
+.react-autosuggest__input--focused {
+  outline: none;
+}
+
+.react-autosuggest__input--open {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.react-autosuggest__suggestions-container {
+  display: none;
+}
+
+.react-autosuggest__suggestions-container--open {
+  display: block;
+  position: absolute;
+  top: 75px;
+  width: 320px;
+  border: 1px solid #aaa;
+  background-color: #fff;
+  font-family: 'Roboto Slab', serif;
+  font-weight: 300;
+  font-size: 16px;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  z-index: 2;
+}
+
+.react-autosuggest__suggestions-list {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+.react-autosuggest__suggestion {
+  cursor: pointer;
+  padding: 10px 20px;
+}
+
+.react-autosuggest__suggestion--highlighted {
+  background-color: #ddd;
+}
+
+.text-title {
+  color: white;
+  font-family: 'Roboto Slab', serif;
+  text-align: center;
+  font-size: 64px;
+  line-height: 1;
+}
+
+.text-subtitle {
+  color: white;
+  font-family: 'Roboto Slab', serif;
+  text-align: center;
+  font-size: 42px;
+  line-height: 1;
+}
+
+.word-stat-container {
+  font-family: 'Roboto Slab', serif;
+  padding: 4px 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.button {
+  background-color: yellow;
+  border: none;
+  padding: 4px 24px;
+  font-size: 24px;
+  font-family: 'Roboto Slab', serif;
+  font-weight: bold;
+}
+
+.background {
+  z-index: -1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: black;
+}
+
+.rain-text {
+  color: white;
+  font-size: 30px;
+  line-height: 1;
+  transform: rotate(90deg);
+  position: absolute;
+  animation-name: fall;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  font-family: 'Roboto Slab', serif;
+  opacity: 0;
+}
+
+.share-container {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.share-container-normal {
+  height: 100vh;
+  height: calc(100vh - var(--vh-offset, 0px));
+}
+
+.share-container-square {
+  width: 500px;
+  height: 500px;
+}
+
+.share-container-story {
+  width: 500px;
+  height: 888px;
+}
+
+.share-container-square .hide-when-share {
+  display: none;
+}
+
+.share-container-story .hide-when-share {
+  display: none;
+}
+
+.share-container-normal .hide-when-normal {
+  display: none;
+}
+
+.share-frame {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  right: 8px;
+  bottom: 8px;
+  border: 2px solid white;
+  pointer-events: none;
+}
+
+.frame-text {
+  font-family: 'Roboto Slab', serif;
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: white;
+  padding: 4px 8px;
+}
+
+.share-container-story .frame-text {
+  top: unset;
+  bottom: 0;
+  right: 0;
+}
+
+.modal-container {
+}
+.modal-overlay {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  visibility: hidden;
+  opacity: 0;
+  background-color: rgba(255, 255, 255, 0.3);
+  z-index: 998;
+  transition: all 0.3s;
+}
+.modal-content {
+  position: absolute;
+  top: 50%;
+  left: 16px;
+  right: 16px;
+  transform: translate(0, -50%);
+  padding: 8px;
+  background-color: white;
+  z-index: 999;
+}
+
+.share-option {
+  display: block;
+  width: 100%;
+  border: 1px solid black;
+  background: transparent;
+  text-align: left;
+  padding: 8px;
+}
+
+.share-option-title {
+  font-family: 'Roboto Slab', serif;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.share-option-subtitle {
+  font-family: 'Roboto Slab', serif;
+  font-size: 14px;
+}
+
+@keyframes fall {
+  0% { opacity: 0; top: 0% }
+  50% { opacity: 1; top: 50% }
+  100% { opacity: 0; top: 100% }
+}
+
+
