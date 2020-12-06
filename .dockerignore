@@ -1,0 +1,6 @@
+*
+!.next
+!package.json
+!yarn.lock
+!public
+!.env.local
