@@ -57,10 +57,6 @@ files:
         }
       }
 
-packages: 
-  yum:
-    epel-release: [] 
-
 container_commands:
   10_installcertbot:
     command: "wget https://dl.eff.org/certbot-auto;chmod a+x certbot-auto"
