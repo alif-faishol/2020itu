@@ -7,6 +7,7 @@ COPY ./package.json ./
 COPY ./yarn.lock ./
 COPY ./public ./public/
 COPY ./.env.local ./
+COPY ./next.config.js ./
 
 ENV NODE_ENV production
 
