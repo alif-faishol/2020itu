@@ -59,9 +59,9 @@ files:
 
 container_commands:
   10_installcertbot:
-    command: "wget https://dl.eff.org/certbot-auto;chmod a+x certbot-auto"
+    command: "wget https://raw.githubusercontent.com/certbot/certbot/7f0fa18c570942238a7de73ed99945c3710408b4/letsencrypt-auto-source/letsencrypt-auto;chmod a+x letsencrypt-auto"
   20_getcert:
-    command: "sudo ./certbot-auto certonly --debug --non-interactive --email %EMAIL% --agree-tos --standalone --domains %DOMAIN% --keep-until-expiring --pre-hook \"sudo service nginx stop\" --post-hook \"sudo service nginx start\""
+    command: "sudo ./letsencrypt-auto certonly --debug --non-interactive --email %EMAIL% --agree-tos --standalone --domains %DOMAIN% --keep-until-expiring --pre-hook \"sudo service nginx stop\" --post-hook \"sudo service nginx start\""
   30_link:
     command: "ln -sf /etc/letsencrypt/live/${certdomain} /etc/letsencrypt/live/ebcert"
   40_config:
