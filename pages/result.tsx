@@ -1,8 +1,7 @@
 import { NextPage } from 'next';
 import axios from 'axios';
-import Link from 'next/link';
-import { useRouter } from 'next/router';
 import styles from '@styles/Home.module.css';
+import i18n from '@utils/i18n';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { toBlob } from 'html-to-image';
 import {
@@ -13,13 +12,17 @@ import {
   WhatsAppOutlined,
 } from '@ant-design/icons';
 import WordRain from '@components/WordRain';
+import Footer from '@components/Footer';
+import { TFunction } from 'next-i18next';
 
 type ResultPageProps = {
   word?: string;
+  t?: TFunction;
+  namespacesRequired: string[];
 };
 
-const ResultPage: NextPage<ResultPageProps> = ({ word }) => {
-  const router = useRouter();
+const ResultPage: NextPage<ResultPageProps> = ({ word, t }) => {
+  const router = i18n.Router;
 
   const shareableRef = useRef<HTMLDivElement>();
   const maxWordCountRef = useRef<number>(1);
@@ -38,8 +41,8 @@ const ResultPage: NextPage<ResultPageProps> = ({ word }) => {
   }, []);
 
   const onUrlShare = useCallback(() => {
-    navigator.share({ url: window.location.href, text: `#2020itu ${word}` });
-  }, []);
+    navigator.share({ url: window.location.href, text: `#${t('2020itu')} ${word}` });
+  }, [t, word]);
 
   useEffect(() => {
     if (mode === 'normal') return;
@@ -52,11 +55,11 @@ const ResultPage: NextPage<ResultPageProps> = ({ word }) => {
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         files: [new File([blob], 'share.png', { type: blob.type })],
-        title: '2020itu',
+        title: t('2020itu'),
       });
       setMode('normal');
     });
-  }, [mode]);
+  }, [mode, t]);
 
   useEffect(() => {
     if (router && !word) {
@@ -98,7 +101,7 @@ const ResultPage: NextPage<ResultPageProps> = ({ word }) => {
         </div>
         <div className={styles.container} style={{ backgroundColor: 'rgba(0, 0, 0, 0.25)' }}>
           <h1 className="text-title">
-            #2020itu
+            #{t('2020itu')}
             <br />
             <span className="text-subtitle">{word}</span>
           </h1>
@@ -118,13 +121,14 @@ const ResultPage: NextPage<ResultPageProps> = ({ word }) => {
               <OrderedListOutlined />
             </button>
           </div>
-          <Link href="hope">
+          <i18n.Link href="/hope">
             <a className="button hide-when-share" style={{ marginTop: 24 }}>
-              Selanjutnya
+              {t('Selanjutnya')}
             </a>
-          </Link>
+          </i18n.Link>
         </div>
       </div>
+      <Footer />
       <div className="modal-container">
         {/* eslint-disable-next-line */}
         <div
@@ -140,8 +144,8 @@ const ResultPage: NextPage<ResultPageProps> = ({ word }) => {
               disabled={!canShareImage}
               style={{ marginBottom: 8 }}
             >
-              <div className="share-option-title">Persegi (Gambar)</div>
-              <div className="share-option-subtitle">Gambar untuk posting</div>
+              <div className="share-option-title">{t('square_share')}</div>
+              <div className="share-option-subtitle">{t('square_share_description')}</div>
             </button>
             <button
               onClick={() => onShare('story')}
@@ -149,26 +153,26 @@ const ResultPage: NextPage<ResultPageProps> = ({ word }) => {
               disabled={!canShareImage}
               style={{ marginBottom: 8 }}
             >
-              <div className="share-option-title">Story (Gambar)</div>
-              <div className="share-option-subtitle">Gambar untuk story</div>
+              <div className="share-option-title">{t('story_share')}</div>
+              <div className="share-option-subtitle">{t('story_share_description')}</div>
             </button>
             {!canShareImage && (
               <div
                 className="text-subtitle"
                 style={{ fontSize: 12, color: 'red', marginBottom: 8, textAlign: 'left' }}
               >
-                Browser tidak mendukung sharing gambar
+                {t('image_share_not_supported')}
               </div>
             )}
             {canShare ? (
               <button className="share-option" onClick={onUrlShare}>
-                <div className="share-option-title">URL</div>
-                <div className="share-option-subtitle">Link ke halaman ini</div>
+                <div className="share-option-title">{t('url_share')}</div>
+                <div className="share-option-subtitle">{t('url_share_description')}</div>
               </button>
             ) : (
               <div className="share-option">
-                <div className="share-option-title">URL</div>
-                <div className="share-option-subtitle">Link ke halaman ini</div>
+                <div className="share-option-title">{t('url_share')}</div>
+                <div className="share-option-subtitle">{t('url_share_description')}</div>
                 <div style={{ marginTop: 8 }}>
                   <a
                     target="__blank"
@@ -184,7 +188,7 @@ const ResultPage: NextPage<ResultPageProps> = ({ word }) => {
                     target="__blank"
                     href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(
                       window.location.href
-                    )}&text=${encodeURIComponent(`#2020itu ${word}`)}`}
+                    )}&text=${encodeURIComponent(`#${t('2020itu')} ${word}`)}`}
                     className="button hide-when-share"
                     style={{ marginLeft: 8, padding: 8, width: 48, height: 48 }}
                   >
@@ -193,7 +197,7 @@ const ResultPage: NextPage<ResultPageProps> = ({ word }) => {
                   <a
                     target="__blank"
                     href={`https://wa.me/?text=${encodeURIComponent(
-                      `#2020itu ${word} ${window.location.href}`
+                      `#${t('2020itu')} ${word} ${window.location.href}`
                     )}`}
                     className="button hide-when-share"
                     style={{ marginLeft: 8, padding: 8, width: 48, height: 48 }}
@@ -208,7 +212,7 @@ const ResultPage: NextPage<ResultPageProps> = ({ word }) => {
         {modal === 'graph' && (
           <div className="modal-content" style={{ paddingTop: 0 }}>
             <h1 className="text-subtitle" style={{ color: 'black', fontSize: 24 }}>
-              Respon Populer
+              {t('Respon Populer')}
             </h1>
             <div
               style={{
@@ -233,7 +237,10 @@ const ResultPage: NextPage<ResultPageProps> = ({ word }) => {
 };
 
 ResultPage.getInitialProps = (ctx) => {
-  return { word: !Array.isArray(ctx.query.word) ? ctx.query.word : undefined };
+  return {
+    word: !Array.isArray(ctx.query.word) ? ctx.query.word : undefined,
+    namespacesRequired: ['common'],
+  };
 };
 
-export default ResultPage;
+export default i18n.withTranslation('common')(ResultPage);

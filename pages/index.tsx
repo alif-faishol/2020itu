@@ -1,13 +1,20 @@
 import { NextPage } from 'next';
-import { useRouter } from 'next/router';
 import styles from '@styles/Home.module.css';
 import { useState, useCallback, useEffect } from 'react';
 import AutoSuggest from 'react-autosuggest';
 import axios from 'axios';
 import Fuse from 'fuse.js';
+import { TFunction } from 'next-i18next';
+import i18n from '@utils/i18n';
+import Footer from '@components/Footer';
 
-const IndexPage: NextPage = () => {
-  const router = useRouter();
+type IndexPageProps = {
+  t?: TFunction;
+  namespacesRequired: string[];
+};
+
+const IndexPage: NextPage<IndexPageProps> = ({ t }) => {
+  const router = i18n.Router;
   const [word, setWord] = useState<string>('');
 
   const [words, setWords] = useState<Array<{ word: string; count: number }>>([]);
@@ -27,7 +34,7 @@ const IndexPage: NextPage = () => {
 
   const onSubmit = useCallback(() => {
     axios.post('/api/words', { word });
-    router.push({ pathname: 'result', query: { word } });
+    router.push({ pathname: '/result', query: { word } });
   }, [word, router]);
 
   useEffect(() => {
@@ -50,7 +57,7 @@ const IndexPage: NextPage = () => {
         <h1 className="text-title">
           2020
           <br />
-          <span className="text-subtitle">itu</span>
+          <span className="text-subtitle">{t('itu')}</span>
         </h1>
         <AutoSuggest
           renderSuggestion={(s) => <span>{s.item.word}</span>}
@@ -61,17 +68,22 @@ const IndexPage: NextPage = () => {
           suggestions={suggestedWords}
           getSuggestionValue={(item) => item.item.word}
           inputProps={{
-            placeholder: 'Ketik disini',
+            placeholder: t('Ketik di sini'),
             value: word,
             onChange: (_e, { newValue }) => setWord(newValue.slice(0, 15)),
           }}
         />
         <button onClick={onSubmit} className="button" style={{ marginTop: 32 }}>
-          Kirim
+          {t('Kirim')}
         </button>
       </div>
+      <Footer />
     </>
   );
 };
 
-export default IndexPage;
+IndexPage.getInitialProps = async () => ({
+  namespacesRequired: ['common'],
+});
+
+export default i18n.withTranslation('common')(IndexPage);
