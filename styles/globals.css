@@ -19,101 +19,116 @@ body {
   font-family: Helvetica, sans-serif;
 }
 
-.react-autosuggest__container {
-  position: relative;
-}
-
-.react-autosuggest__input {
+.text-input {
   text-align: center;
   width: 320px;
   padding: 10px 20px;
-  font-family: 'Roboto Slab', serif;
-  font-weight: normal;
-  font-size: 42px;
+  font-family: 'PT Serif', serif;
+  font-weight: bold;
+  font-size: 48px;
   border: none;
   border-radius: 0;
   background: transparent;
-  color: yellow;
-  border-bottom: 1px solid white;
+  color: white;
+  border-bottom: 5px solid white;
 }
 
-.react-autosuggest__input::-webkit-input-placeholder {
-   text-align: center;
+.text-input.light {
+  color: black;
+  border-bottom: 5px solid #F8D948;
 }
 
-.react-autosuggest__input:-moz-placeholder { /* Firefox 18- */
-   text-align: center;  
-}
-
-.react-autosuggest__input::-moz-placeholder {  /* Firefox 19+ */
-   text-align: center;  
-}
-
-.react-autosuggest__input:-ms-input-placeholder {  
-   text-align: center; 
-}
-
-.react-autosuggest__input--focused {
+.text-input:focus {
   outline: none;
 }
 
-.react-autosuggest__input--open {
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
+.text-input::-webkit-input-placeholder {
+  text-align: center;
+  font-weight: normal;
 }
 
-.react-autosuggest__suggestions-container {
-  display: none;
+.text-input:-moz-placeholder { /* Firefox 18- */
+  text-align: center;  
+  font-weight: normal;
 }
 
-.react-autosuggest__suggestions-container--open {
-  display: block;
-  position: absolute;
-  top: 75px;
-  width: 320px;
-  border: 1px solid #aaa;
-  background-color: #fff;
-  font-family: 'Roboto Slab', serif;
-  font-weight: 300;
-  font-size: 16px;
-  border-bottom-left-radius: 4px;
-  border-bottom-right-radius: 4px;
-  z-index: 2;
+.text-input::-moz-placeholder {  /* Firefox 19+ */
+  text-align: center;  
+  font-weight: normal;
 }
 
-.react-autosuggest__suggestions-list {
-  margin: 0;
-  padding: 0;
-  list-style-type: none;
+.text-input:-ms-input-placeholder {  
+  text-align: center; 
+  font-weight: normal;
 }
 
-.react-autosuggest__suggestion {
-  cursor: pointer;
-  padding: 10px 20px;
-}
-
-.react-autosuggest__suggestion--highlighted {
-  background-color: #ddd;
+.content {
+  flex: 1 0 350px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
 }
 
 .text-title {
   color: white;
-  font-family: 'Roboto Slab', serif;
+  font-family: 'PT Serif', serif;
   text-align: center;
   font-size: 64px;
+  font-weight: 400;
+  color: #F8D948;
   line-height: 1;
 }
 
-.text-subtitle {
-  color: white;
-  font-family: 'Roboto Slab', serif;
+.text-title-2 {
+  color: black;
+  font-weight: bold;
+  font-size: 32px;
+  font-family: 'PT Serif', serif;
   text-align: center;
-  font-size: 42px;
-  line-height: 1;
+}
+
+.text-title-3 {
+  color: white;
+  font-weight: bold;
+  font-size: 24px;
+  font-family: 'PT Serif', serif;
+  text-align: left;
+}
+
+.text-body-2 {
+  color: black;
+  font-weight: 500;
+  font-size: 10px;
+  line-height: 1.5;
+  text-align: center;
+  font-family: 'Poppins', sans-serif;
+  white-space: pre-wrap;
+}
+
+.text-body-3 {
+  color: #F8D948;
+  font-weight: 500;
+  font-size: 10px;
+  line-height: 1.5;
+  text-align: left;
+  font-family: 'Poppins', sans-serif;
+  white-space: pre-wrap;
+}
+
+.text-body-3 a {
+  color: white;
+}
+
+.text-word {
+  color: white;
+  font-size: 48px;
+  font-weight: bold;
 }
 
 .word-stat-container {
-  font-family: 'Roboto Slab', serif;
+  font-family: 'PT Serif', serif;
   padding: 4px 0;
   display: flex;
   justify-content: space-between;
@@ -122,12 +137,25 @@ body {
 .button {
   display: inline-block;
   text-align: center;
-  background-color: yellow;
+  background-color: #F8D948;
   border: none;
   padding: 4px 24px;
   font-size: 24px;
-  font-family: 'Roboto Slab', serif;
+  font-family: 'PT Serif', serif;
   font-weight: bold;
+}
+
+.button.link {
+  font-family: 'Poppins', sans-serif;
+  background-color: transparent;
+  color: white;
+  font-size: 18px;
+  line-height: 36px;
+}
+
+.button.small {
+  font-size: 12px;
+  padding: 2px 12px;
 }
 
 .background {
@@ -149,7 +177,7 @@ body {
   animation-name: fall;
   animation-iteration-count: infinite;
   animation-timing-function: linear;
-  font-family: 'Roboto Slab', serif;
+  font-family: 'PT Serif', serif;
   opacity: 0;
 }
 
@@ -163,8 +191,8 @@ body {
 }
 
 .share-container-normal {
-  height: 100vh;
-  height: calc(100vh - var(--vh-offset, 0px));
+  min-height: 100vh;
+  min-height: calc(100vh - var(--vh-offset, 0px));
 }
 
 .share-container-square {
@@ -189,6 +217,14 @@ body {
   display: none;
 }
 
+.share-container-square .header-container {
+  justify-content: center;
+}
+
+.share-container-square .header-right-container {
+  display: none;
+}
+
 .share-frame {
   position: absolute;
   top: 8px;
@@ -200,7 +236,7 @@ body {
 }
 
 .frame-text {
-  font-family: 'Roboto Slab', serif;
+  font-family: 'PT Serif', serif;
   position: absolute;
   top: 0;
   right: 0;
@@ -251,13 +287,13 @@ body {
 }
 
 .share-option-title {
-  font-family: 'Roboto Slab', serif;
+  font-family: 'PT Serif', serif;
   font-size: 18px;
   font-weight: 700;
 }
 
 .share-option-subtitle {
-  font-family: 'Roboto Slab', serif;
+  font-family: 'PT Serif', serif;
   font-size: 14px;
 }
 
@@ -267,4 +303,73 @@ body {
   100% { opacity: 0; top: 100% }
 }
 
+.header-container {
+  padding: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
 
+.header-left-container img {
+  height: 40px;
+}
+
+.header-right-container {
+  display: flex;
+  align-items: center;
+}
+
+.header-lang-switcher {
+  position: relative;
+}
+
+.header-lang-switcher img {
+  height: 24px;
+}
+
+.header-lang-switcher-options {
+  display: none;
+  position: absolute;
+  z-index: 2;
+  background-color: #F8D948;
+  top: 100%;
+  right: 0;
+}
+
+.header-lang-switcher:hover .header-lang-switcher-options {
+  display: block;
+}
+
+.header-lang-switcher-option {
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  white-space: nowrap;
+  border: none;
+  background-color: white;
+  width: 100%;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+}
+
+.header-lang-switcher-option img {
+  margin-right: 8px;
+}
+
+.footer {
+  padding: 18px 24px;
+  width: 100%;
+  font-family: 'Poppins', sans-serif;
+  font-size: 10px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.footer.dark {
+  color: white;
+}
+
+.footer.light {
+  color: black;
+}

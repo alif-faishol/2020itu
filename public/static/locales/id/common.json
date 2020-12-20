@@ -1,4 +1,11 @@
 {
+  "input_word_placeholder": "Ketik di sini",
+  "button_label_about": "Tentang",
+  "button_label_home": "Home",
+  "button_label_submit": "Kirim",
+  "button_label_share": "Bagikan",
+  "button_label_next": "Lanjut",
+
   "square_share": "Persegi (Gambar)",
   "square_share_description": "Gambar untuk posting",
   "story_share": "Story (Gambar)",
@@ -6,7 +13,7 @@
   "image_share_not_supported": "Browser tidak mendukung sharing gambar",
   "url_share": "URL",
   "url_share_description": "Link ke halaman ini",
-  "thanks_for_response": "Terimakasih atas tanggapannya!",
-  "your_hope_for": "harapan kamu untuk",
-  "about": "Tentang"
+  "your_hope_for": "Apa yang kamu inginkan di 2021?",
+  "about": "Tentang",
+  "thanks_for_response": "Terima kasih sudah berbagi!"
 }

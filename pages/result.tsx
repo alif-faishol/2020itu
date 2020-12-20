@@ -1,19 +1,13 @@
 import { NextPage } from 'next';
 import axios from 'axios';
-import styles from '@styles/Home.module.css';
 import i18n from '@utils/i18n';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { toBlob } from 'html-to-image';
-import {
-  FacebookFilled,
-  OrderedListOutlined,
-  ShareAltOutlined,
-  TwitterOutlined,
-  WhatsAppOutlined,
-} from '@ant-design/icons';
+import { FacebookFilled, TwitterOutlined, WhatsAppOutlined } from '@ant-design/icons';
 import WordRain from '@components/WordRain';
 import Footer from '@components/Footer';
 import { TFunction } from 'next-i18next';
+import Header from '@components/Header';
 
 type ResultPageProps = {
   word?: string;
@@ -28,7 +22,7 @@ const ResultPage: NextPage<ResultPageProps> = ({ word, t }) => {
   const maxWordCountRef = useRef<number>(1);
   const [words, setWords] = useState<Array<{ word: string; count: number }>>([]);
   const [mode, setMode] = useState<'normal' | 'square' | 'story'>('normal');
-  const [modal, setModal] = useState<'share' | 'graph'>();
+  const [modal, setModal] = useState<'share'>();
 
   const canShare = typeof window !== 'undefined' && navigator.share;
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -96,39 +90,30 @@ const ResultPage: NextPage<ResultPageProps> = ({ word, t }) => {
         <div className="background">
           <WordRain words={words} maxCount={maxWordCountRef.current} />
         </div>
-        <div className="hide-when-normal share-frame">
-          <div className="frame-text">2020itu.com</div>
-        </div>
-        <div className={styles.container} style={{ backgroundColor: 'rgba(0, 0, 0, 0.25)' }}>
+        <Header />
+        <div className="content" style={{ backgroundColor: 'rgba(0, 0, 0, 0.25)' }}>
           <h1 className="text-title">
             #{t('2020itu')}
             <br />
-            <span className="text-subtitle">{word}</span>
+            <span className="text-word">{word}</span>
           </h1>
           <div>
             <button
               onClick={() => setModal('share')}
-              className="button hide-when-share"
-              style={{ padding: 8, width: 48, height: 48 }}
+              className="button link hide-when-share"
+              style={{ whiteSpace: 'nowrap' }}
             >
-              <ShareAltOutlined />
+              {t('button_label_share')}
             </button>
-            <button
-              onClick={() => setModal('graph')}
-              className="button hide-when-share"
-              style={{ marginLeft: 8, padding: 8, width: 48, height: 48 }}
-            >
-              <OrderedListOutlined />
-            </button>
+            <i18n.Link href="/hope">
+              <a className="button hide-when-share" style={{ marginTop: 24 }}>
+                {t('button_label_next')}
+              </a>
+            </i18n.Link>
           </div>
-          <i18n.Link href="/hope">
-            <a className="button hide-when-share" style={{ marginTop: 24 }}>
-              {t('Selanjutnya')}
-            </a>
-          </i18n.Link>
         </div>
+        <Footer />
       </div>
-      <Footer />
       <div className="modal-container">
         {/* eslint-disable-next-line */}
         <div
@@ -207,28 +192,6 @@ const ResultPage: NextPage<ResultPageProps> = ({ word, t }) => {
                 </div>
               </div>
             )}
-          </div>
-        )}
-        {modal === 'graph' && (
-          <div className="modal-content" style={{ paddingTop: 0 }}>
-            <h1 className="text-subtitle" style={{ color: 'black', fontSize: 24 }}>
-              {t('Respon Populer')}
-            </h1>
-            <div
-              style={{
-                overflow: 'auto',
-                maxHeight: 250,
-                padding: 8,
-                border: '1px solid black',
-              }}
-            >
-              {words.map((word) => (
-                <div key={word.word} className="word-stat-container">
-                  <div>{word.word}</div>
-                  <div>{word.count}</div>
-                </div>
-              ))}
-            </div>
           </div>
         )}
       </div>

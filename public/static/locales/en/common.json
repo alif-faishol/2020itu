@@ -7,6 +7,13 @@
   "Respon Populer": "Popular Response",
   "2020itu": "2020was",
 
+  "input_word_placeholder": "Type here",
+  "button_label_about": "About",
+  "button_label_home": "Home",
+  "button_label_submit": "Submit",
+  "button_label_share": "Share This",
+  "button_label_next": "Next",
+
   "square_share": "Square Image",
   "square_share_description": "Image for Social Media Post",
   "story_share": "Story-style Image",
@@ -15,6 +22,6 @@
   "url_share": "URL",
   "url_share_description": "Link to this page",
   "thanks_for_response": "Thank you for your participation!",
-  "your_hope_for": "your hope for",
+  "your_hope_for": "Your hope for 2021?",
   "about": "About"
 }
