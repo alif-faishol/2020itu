@@ -1,11 +1,10 @@
 import { FC, Fragment, memo } from 'react';
 
 type WordRainProps = {
-  words: Array<{ word: string; count: number }>;
-  maxCount: number;
+  words: Array<{ word: string }>;
 };
 
-const WordRain: FC<WordRainProps> = ({ words, maxCount }) => {
+const WordRain: FC<WordRainProps> = ({ words }) => {
   const windowWidth = typeof window !== 'undefined' ? window.innerWidth : 0;
 
   return (
@@ -19,7 +18,7 @@ const WordRain: FC<WordRainProps> = ({ words, maxCount }) => {
             className="rain-text"
             style={{
               left: `${Math.random() * 100}%`,
-              fontSize: 20 + 20 * (item.count / maxCount),
+              fontSize: 20 + 20 * Math.random(),
               animationDuration: `${5 + Math.random() * 10}s`,
               animationDelay: `${-2 + Math.random() * 5}s`,
             }}

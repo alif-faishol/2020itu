@@ -69,3 +69,7 @@ export const createApi = (handlers: {
       }
     }
   });
+
+export const getOneQuery = (queryParam: string | string[] | undefined): string | undefined => {
+  return Array.isArray(queryParam) ? queryParam[0] : queryParam;
+};

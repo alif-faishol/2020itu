@@ -17,9 +17,9 @@ type ResultPageProps = {
 
 const ResultPage: NextPage<ResultPageProps> = ({ word, t }) => {
   const router = i18n.Router;
+  const windowWidth = typeof window !== 'undefined' ? window.innerWidth : 0;
 
   const shareableRef = useRef<HTMLDivElement>();
-  const maxWordCountRef = useRef<number>(1);
   const [words, setWords] = useState<Array<{ word: string; count: number }>>([]);
   const [mode, setMode] = useState<'normal' | 'square' | 'story'>('normal');
   const [modal, setModal] = useState<'share'>();
@@ -62,25 +62,8 @@ const ResultPage: NextPage<ResultPageProps> = ({ word, t }) => {
   }, [router, word]);
 
   useEffect(() => {
-    axios.get('/api/words').then((res) => {
-      setWords(
-        res.data?.Items?.map((item: { [key: string]: { [key: string]: string } }) => {
-          if (maxWordCountRef.current < parseInt(item.SubmitCount?.N, 10)) {
-            maxWordCountRef.current = parseInt(item.SubmitCount?.N, 10);
-          }
-
-          return {
-            word: item.Message?.S,
-            count: parseInt(item.SubmitCount?.N, 10),
-          };
-        })
-          .filter((item: { word: string | undefined; count: number }) => item.word && item.count)
-          .sort((a, b) => {
-            if (a.count > b.count) return -1;
-            if (a.count < b.count) return 1;
-            return 0;
-          })
-      );
+    axios.get('/api/words', { params: { size: Math.round(windowWidth / 30) } }).then((res) => {
+      setWords(res.data.data);
     });
   }, []);
 
@@ -88,7 +71,7 @@ const ResultPage: NextPage<ResultPageProps> = ({ word, t }) => {
     <>
       <div ref={shareableRef} className={`share-container share-container-${mode}`}>
         <div className="background">
-          <WordRain words={words} maxCount={maxWordCountRef.current} />
+          <WordRain words={words} />
         </div>
         <Header />
         <div className="content" style={{ backgroundColor: 'rgba(0, 0, 0, 0.25)' }}>

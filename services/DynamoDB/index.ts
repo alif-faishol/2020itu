@@ -8,20 +8,80 @@ const dynamodb = new AWS.DynamoDB({
   secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
 });
 
-const A_WORD_FOR_2020_MESSAGE_TYPE = '1';
-const HOPE_FOR_2021_MESSAGE_TYPE = '2';
+const WORD_COUNT_MESSAGE_TYPE = '1';
+const HOPE_MESSAGE_TYPE = '2';
+const WORD_MESSAGE_TYPE = '3';
 
-export const getWords = async (): Promise<PromiseResult<AWS.DynamoDB.ScanOutput, AWS.AWSError>> => {
+const generateTimestamp = (): string => `${new Date().toISOString()}-${Math.random().toString(36)}`;
+
+type GetWordsOptions = {
+  size?: number;
+  dateStart?: Date;
+  dateEnd?: Date;
+  startKey?: string;
+};
+
+export const getWords = async (
+  options?: GetWordsOptions
+): Promise<PromiseResult<AWS.DynamoDB.ScanOutput, AWS.AWSError>> => {
+  const dateStart = options?.dateStart?.toISOString();
+  const dateEnd = options?.dateEnd?.toISOString();
+
   const response = await dynamodb
     .query({
       TableName: '2020itu',
-      Limit: 500,
+      Limit: options?.size ?? 50,
+      ScanIndexForward: false,
+      ...(options?.startKey
+        ? {
+            ExclusiveStartKey: {
+              MessageType: {
+                S: WORD_MESSAGE_TYPE,
+              },
+              Message: {
+                S: options.startKey,
+              },
+            },
+          }
+        : {}),
       ExpressionAttributeValues: {
         ':type': {
-          S: A_WORD_FOR_2020_MESSAGE_TYPE,
+          S: WORD_MESSAGE_TYPE,
+        },
+        ...(dateStart && dateEnd
+          ? {
+              ':datestart': {
+                S: dateStart || '0',
+              },
+              ':dateend': {
+                S: dateEnd || '0',
+              },
+            }
+          : {}),
+      },
+      KeyConditionExpression: `MessageType = :type${
+        dateStart && dateEnd ? ' AND Message BETWEEN :dateend AND :datestart' : ''
+      }`,
+    })
+    .promise();
+
+  return response;
+};
+
+export const getWordCount = async (
+  word: string
+): Promise<PromiseResult<AWS.DynamoDB.GetItemOutput, AWS.AWSError>> => {
+  const response = await dynamodb
+    .getItem({
+      TableName: '2020itu',
+      Key: {
+        MessageType: {
+          S: WORD_COUNT_MESSAGE_TYPE,
+        },
+        Message: {
+          S: word,
         },
       },
-      KeyConditionExpression: 'MessageType = :type',
     })
     .promise();
 
@@ -30,28 +90,46 @@ export const getWords = async (): Promise<PromiseResult<AWS.DynamoDB.ScanOutput,
 
 export const submitWord = async (
   word: string
-): Promise<PromiseResult<AWS.DynamoDB.UpdateItemOutput, AWS.AWSError>> => {
-  const response = await dynamodb
-    .updateItem({
-      TableName: '2020itu',
-      Key: {
-        MessageType: {
-          S: A_WORD_FOR_2020_MESSAGE_TYPE,
+): Promise<PromiseResult<AWS.DynamoDB.PutItemOutput, AWS.AWSError>> => {
+  const responses = await Promise.all([
+    dynamodb
+      .putItem({
+        TableName: '2020itu',
+        Item: {
+          MessageType: {
+            S: WORD_MESSAGE_TYPE,
+          },
+          Message: {
+            S: generateTimestamp(),
+          },
+          Word: {
+            S: word,
+          },
         },
-        Message: {
-          S: word,
+      })
+      .promise(),
+    dynamodb
+      .updateItem({
+        TableName: '2020itu',
+        Key: {
+          MessageType: {
+            S: WORD_COUNT_MESSAGE_TYPE,
+          },
+          Message: {
+            S: word.toLowerCase(),
+          },
         },
-      },
-      ExpressionAttributeValues: {
-        ':value': {
-          N: '1',
+        ExpressionAttributeValues: {
+          ':value': {
+            N: '1',
+          },
         },
-      },
-      UpdateExpression: 'ADD SubmitCount :value',
-    })
-    .promise();
+        UpdateExpression: 'ADD SubmitCount :value',
+      })
+      .promise(),
+  ]);
 
-  return response;
+  return responses[0];
 };
 
 export const submitHope = async (
@@ -62,9 +140,12 @@ export const submitHope = async (
       TableName: '2020itu',
       Item: {
         MessageType: {
-          S: HOPE_FOR_2021_MESSAGE_TYPE,
+          S: HOPE_MESSAGE_TYPE,
         },
         Message: {
+          S: generateTimestamp(),
+        },
+        Hope: {
           S: hope,
         },
       },
