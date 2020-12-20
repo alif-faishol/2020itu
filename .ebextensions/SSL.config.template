@@ -8,15 +8,6 @@ Resources:
       FromPort: 443
       CidrIp: 0.0.0.0/0
 
-files:
-  "/opt/elasticbeanstalk/hooks/appdeploy/post/99_setup_letsencrypt.sh":
-    mode: "000755"
-    owner: root
-    group: root
-    content: |
-      #!/usr/bin/env bash
-      sudo certbot --nginx --debug --non-interactive --email %EMAIL% --agree-tos --domains %DOMAIN% --keep
-
 container_commands:
   01_install_epel:
     command: "sudo amazon-linux-extras install epel -y"
