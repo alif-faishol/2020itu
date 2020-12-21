@@ -3,7 +3,7 @@ import App from 'next/app';
 import i18n from '@utils/i18n';
 import '../styles/globals.css';
 import vhCheck from 'vh-check';
-import { Router } from 'next/router';
+import { Router, useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { pageview } from '@utils/gtag';
 
@@ -12,7 +12,7 @@ if (typeof window !== 'undefined') {
 }
 
 const MyApp: AppType = ({ Component, pageProps }) => {
-  const router = i18n.Router;
+  const router = useRouter();
   useEffect(() => {
     const handleRouteChange = (url: string): void => {
       pageview(url);
