@@ -11,8 +11,12 @@ export default createApi({
 
     const wordCount = await getWordCount(word);
 
+    if (!wordCount.Item) {
+      throw new ApiError('Word not found!', 404);
+    }
+
     res.json({
-      data: wordCount.Item && {
+      data: {
         word: wordCount.Item.Message?.S,
         count: parseInt(wordCount.Item.SubmitCount?.N, 10),
       },
