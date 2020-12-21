@@ -23,7 +23,7 @@ type GetWordsOptions = {
 
 export const getWords = async (
   options?: GetWordsOptions
-): Promise<PromiseResult<AWS.DynamoDB.ScanOutput, AWS.AWSError>> => {
+): Promise<PromiseResult<AWS.DynamoDB.QueryOutput, AWS.AWSError>> => {
   const dateStart = options?.dateStart?.toISOString();
   const dateEnd = options?.dateEnd?.toISOString();
 

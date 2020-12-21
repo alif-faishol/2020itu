@@ -63,6 +63,8 @@ body {
 }
 
 .content {
+  max-width: 500px;
+  margin: 0 auto;
   flex: 1 0 350px;
   display: flex;
   flex-direction: column;
@@ -225,6 +227,15 @@ body {
   display: none;
 }
 
+.share-container-story .header-container {
+  justify-content: center;
+  padding-top: 90px;
+}
+
+.share-container-story .header-right-container {
+  display: none;
+}
+
 .share-frame {
   position: absolute;
   top: 8px;
@@ -372,4 +383,13 @@ body {
 
 .footer.light {
   color: black;
+}
+
+@media (min-width: 768px) {
+  .text-body-3 {
+    font-size: 14px;
+  }
+  .text-body-2 {
+    font-size: 14px;
+  }
 }
