@@ -22,6 +22,7 @@ class MyDocument extends Document {
             href="https://fonts.googleapis.com/css2?family=PT+Serif:wght@400;700&family=Poppins:wght@500;700&display=swap"
             rel="stylesheet"
           />
+          <title>#2020itu</title>
         </Head>
         <body>
           <Main />

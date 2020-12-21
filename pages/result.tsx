@@ -65,7 +65,7 @@ const ResultPage: NextPage<ResultPageProps> = ({ word, t }) => {
     axios.get('/api/words', { params: { size: Math.round(windowWidth / 30) } }).then((res) => {
       setWords(res.data.data);
     });
-  }, []);
+  }, [windowWidth]);
 
   return (
     <>
@@ -74,25 +74,34 @@ const ResultPage: NextPage<ResultPageProps> = ({ word, t }) => {
           <WordRain words={words} />
         </div>
         <Header />
-        <div className="content" style={{ backgroundColor: 'rgba(0, 0, 0, 0.25)' }}>
-          <h1 className="text-title">
-            #{t('2020itu')}
-            <br />
-            <span className="text-word">{word}</span>
-          </h1>
-          <div>
-            <button
-              onClick={() => setModal('share')}
-              className="button link hide-when-share"
-              style={{ whiteSpace: 'nowrap' }}
-            >
-              {t('button_label_share')}
-            </button>
-            <i18n.Link href="/hope">
-              <a className="button hide-when-share" style={{ marginTop: 24 }}>
-                {t('button_label_next')}
-              </a>
-            </i18n.Link>
+        <div
+          style={{
+            backgroundColor: 'rgba(0, 0, 0, 0.25)',
+            flex: 1,
+            width: '100%',
+            display: 'flex',
+          }}
+        >
+          <div className="content">
+            <h1 className="text-title">
+              #{t('2020itu')}
+              <br />
+              <span className="text-word">{word}</span>
+            </h1>
+            <div>
+              <button
+                onClick={() => setModal('share')}
+                className="button link hide-when-share"
+                style={{ whiteSpace: 'nowrap' }}
+              >
+                {t('button_label_share')}
+              </button>
+              <i18n.Link href="/hope">
+                <a className="button hide-when-share" style={{ marginTop: 24 }}>
+                  {t('button_label_next')}
+                </a>
+              </i18n.Link>
+            </div>
           </div>
         </div>
         <Footer />

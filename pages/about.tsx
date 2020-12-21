@@ -36,7 +36,17 @@ const AboutPage: NextPage<AboutPageProps> = ({ t, i18n: i18nInstance }) => {
               <br />
               <br />
               Jika ada pertanyaan lebih lanjut seputar laman ini, silakan kontak kami melalui email
-              <a href="#"> berikut.</a>
+              <a target="__blank" href="mailto:lets@coollab.id">
+                {' '}
+                lets@coollab.id
+              </a>
+              .
+              <br />
+              <br />
+              Kamu bisa juga mengolah input data yang masuk dengan menggunakan API{' '}
+              <a target="__blank" href="https://github.com/alif-faishol/2020itu">
+                di sini.
+              </a>
             </p>
           ) : (
             <p className="text-body-3">
@@ -44,7 +54,7 @@ const AboutPage: NextPage<AboutPageProps> = ({ t, i18n: i18nInstance }) => {
               <br />
               <br />
               {
-                "We all know this year isn't easy to go through alone. What about asks your 3 friends to share their feelings here?"
+                "We all know this year isn't easy to go through alone. What about asks 3 of your friends to share their feelings here?"
               }
               <br />
               <br />
@@ -56,8 +66,19 @@ const AboutPage: NextPage<AboutPageProps> = ({ t, i18n: i18nInstance }) => {
               <br />
               <br />
               <br />
-              {"If there's any question regarding this page, feel free to contact us via email"}
-              <a href="#"> here.</a>
+              {"If there's any question regarding this page, feel free to contact us via email at"}
+              <a target="__blank" href="mailto:lets@coollab.id">
+                {' '}
+                lets@coollab.id
+              </a>
+              .
+              <br />
+              <br />
+              {"You can access the data we've gathered via an API "}
+              <a target="__blank" href="https://github.com/alif-faishol/2020itu">
+                here
+              </a>
+              .
             </p>
           )}
         </div>
