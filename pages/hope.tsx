@@ -38,9 +38,9 @@ const HopePage: NextPage<HopePageProps> = ({ t, i18n: i18nInstance }) => {
               </h1>
               {i18nInstance.language === 'id' ? (
                 <p className="text-body-2">
-                  Kamu bisa melihat tanggapan semua orang secara livestream pada video berikut.
+                  Kami akan melakukan video livestream untuk setiap input yang baru masuk.
                   <br />
-                  Nantikan update informasi terbaru di kanal
+                  Nantikan update informasi terbarunya di kanal
                   <a target="__blank" href="https://www.instagram.com/coollab.id/">
                     {' '}
                     Instagram @coollab.id
@@ -49,7 +49,7 @@ const HopePage: NextPage<HopePageProps> = ({ t, i18n: i18nInstance }) => {
                 </p>
               ) : (
                 <p className="text-body-2">
-                  You can read all responses from others in this livestream.
+                  We will host a livestream, visualizing every new incoming words.
                   <br />
                   Visit
                   <a target="__blank" href="https://www.instagram.com/coollab.id/">
