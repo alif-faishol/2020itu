@@ -4,12 +4,25 @@ import i18n from '@utils/i18n';
 import '../styles/globals.css';
 import vhCheck from 'vh-check';
 import { Router } from 'next/router';
+import { useEffect } from 'react';
+import { pageview } from '@utils/gtag';
 
 if (typeof window !== 'undefined') {
   vhCheck();
 }
 
 const MyApp: AppType = ({ Component, pageProps }) => {
+  const router = i18n.Router;
+  useEffect(() => {
+    const handleRouteChange = (url: string): void => {
+      pageview(url);
+    };
+    router.events.on('routeChangeComplete', handleRouteChange);
+    return () => {
+      router.events.off('routeChangeComplete', handleRouteChange);
+    };
+  }, [router.events]);
+
   return <Component {...pageProps} />;
 };
 
