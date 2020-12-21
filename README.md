@@ -7,6 +7,7 @@ Let's share your feeling throughout 2020 as a word or emoji!
 You can access data gathered with this website via an API.
 
 ### Get Submitted Words
+
 `GET https://2020itu.com/api/words`
 
 Query parameters:
@@ -32,6 +33,7 @@ type Response = {
 
 ### Get Word Count
 Check how many a word has been submitted
+
 `GET https://2020itu.com/api/word-count`
 
 Query parameters:
