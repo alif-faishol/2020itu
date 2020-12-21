@@ -83,6 +83,7 @@ jobs:
           touch .env.local
           echo 'AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }}' >> .env.local
           echo 'AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }}' >> .env.local
+          echo 'NEXT_PUBLIC_GA_TRACKING_ID=${{ secrets.NEXT_PUBLIC_GA_TRACKING_ID }}' >> .env.local
           sed -i 's/%DOMAIN%/${{ secrets.DOMAIN }}/g; s/%EMAIL%/${{ secrets.LETS_ENCRYPT_EMAIL }}/g' .platform/hooks/postdeploy/setup_letsencrypt.sh
 
       - name: Build
