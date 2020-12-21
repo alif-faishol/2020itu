@@ -1,30 +1,50 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# #2020itu
 
-## Getting Started
+Let's share your feeling throughout 2020 as a word or emoji!
 
-First, run the development server:
+## API
 
-```bash
-npm run dev
-# or
-yarn dev
+You can access data gathered with this website via an API.
+
+### Get Submitted Words
+`GET https://2020itu.com/api/words`
+
+Query parameters:
+| Param         | Description | Mandatory |
+| ------------- | ----------- | --------- |
+| date-start    | filter responses from specified date, uses ISO Date string (ex: 2020-12-20T23:19:38.007Z) | yes if date-end specified, otherwise no |
+| date-end      | - | yes if date-start specified, otherwise no |
+| size          | how many items returned from API, default `50` | no |
+| next-page-key | use nextPageKey from response to get items from next page | no |
+
+Response:
+```ts
+type Response = {
+  data: Array<{
+    // ISO Date string
+    submitted_at: string;
+    word: string;
+  }>;
+  // Unavailable in last page
+  nextPageKey?: string;
+}
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Get Word Count
+Check how many a word has been submitted
+`GET https://2020itu.com/api/word-count`
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+Query parameters:
+| Param         | Description | Mandatory |
+| ------------- | ----------- | --------- |
+| word          | a word to count | yes |
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/import?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Response:
+```ts
+type Response = {
+  data: {
+    word: string;
+    count: number;
+  };
+}
+```
