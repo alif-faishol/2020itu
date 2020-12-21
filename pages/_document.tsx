@@ -25,6 +25,30 @@ class MyDocument extends Document {
             rel="stylesheet"
           />
           <title>#2020itu</title>
+          <meta name="title" content="#2020itu" />
+          <meta
+            name="description"
+            content="Kami ingin mengajak kamu untuk share apa yang kamu rasakan selama tahun 2020 ini dalam sebuah kata atau emoji."
+          />
+
+          <meta property="og:type" content="website" />
+          <meta property="og:url" content="https://2020itu.com" />
+          <meta property="og:title" content="#2020itu" />
+          <meta
+            property="og:description"
+            content="Kami ingin mengajak kamu untuk share apa yang kamu rasakan selama tahun 2020 ini dalam sebuah kata atau emoji."
+          />
+          <meta property="og:image" content="/images/og_image.png" />
+
+          <meta property="twitter:card" content="summary_large_image" />
+          <meta property="twitter:url" content="https://2020itu.com" />
+          <meta property="twitter:title" content="#2020itu" />
+          <meta
+            property="twitter:description"
+            content="Kami ingin mengajak kamu untuk share apa yang kamu rasakan selama tahun 2020 ini dalam sebuah kata atau emoji."
+          />
+          <meta property="twitter:image" content="/images/og_image.png" />
+
           <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`} />
           <script
             dangerouslySetInnerHTML={{

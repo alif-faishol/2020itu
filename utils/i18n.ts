@@ -8,6 +8,7 @@ const i18n = new NextI18Next({
   defaultLanguage: 'id',
   otherLanguages: ['en'],
   localeSubpaths,
+  browserLanguageDetection: false,
   localePath: path.resolve('./public/static/locales'),
 });
 
