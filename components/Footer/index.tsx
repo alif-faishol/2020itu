@@ -7,7 +7,11 @@ type FooterType = {
 const Footer: FC<FooterType> = ({ theme = 'dark' }) => {
   return (
     <footer className={`footer ${theme}`}>
-      &copy; Copyright 2020 Coollab.id. Proudly #madeinbdg.
+      &copy; Copyright{' '}
+      <a target="__blank" href="https://coollab.id/">
+        Coollab.id
+      </a>
+      . Proudly #madeinbdg.
     </footer>
   );
 };
