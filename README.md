@@ -1,6 +1,10 @@
 # #2020itu
 
+![ci status](https://github.com/alif-faishol/2020itu/workflows/ci/badge.svg)
+
 Let's share your feeling throughout 2020 as a word or emoji!
+
+https://2020itu.com
 
 ## API
 
