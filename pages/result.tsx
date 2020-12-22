@@ -110,7 +110,12 @@ const ResultPage: NextPage<ResultPageProps> = ({ word, t }) => {
         ></div>
         {modal === 'share' && (
           <div className="modal-content">
-            <h2 className="share-title">{t('share_title')}</h2>
+            <div className="share-header">
+              <h2 className="share-title">{t('share_title')}</h2>
+              <button className="share-close" onClick={() => setModal(undefined)}>
+                <img src="/images/icon_close.svg" alt="Close" />
+              </button>
+            </div>
             <div className="share-option">
               <div className="share-option-title">{t('square_share')}</div>
               <button

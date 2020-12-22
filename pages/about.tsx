@@ -57,7 +57,7 @@ const AboutPage: NextPage<AboutPageProps> = ({ i18n: i18nInstance }) => {
                 </a>
                 <br />
                 <br />
-                Jika ada pertanyaan lebih lanjut seputar proyek ini, silakan kontak kami melalui
+                Jika ada pertanyaan lebih lanjut seputar project ini, silakan kontak kami melalui
                 email
                 <a target="__blank" href="mailto:lets@coollab.id">
                   {' '}

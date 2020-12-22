@@ -288,6 +288,27 @@ body {
   z-index: 999;
 }
 
+.share-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.share-close {
+  background: transparent;
+  border: none;
+  padding: 8px;
+  margin-top: 24px;
+  margin-right: 8px;
+  display: block;
+}
+
+.share-close img {
+  width: 24px;
+  height: 24px;
+  display: block;
+}
+
 .share-title {
   padding: 8px 16px 0px 16px;
   font-family: 'Poppins', sans-serif;
