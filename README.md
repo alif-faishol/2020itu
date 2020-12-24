@@ -2,6 +2,8 @@
 
 ![ci status](https://github.com/alif-faishol/2020itu/workflows/ci/badge.svg)
 
+[![Product Hunt](https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=279063&theme=light)](https://www.producthunt.com/posts/2020itu?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-2020itu)
+
 Let's share your feeling throughout 2020 as a word or emoji!
 
 https://2020itu.com

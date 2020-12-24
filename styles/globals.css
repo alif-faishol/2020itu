@@ -21,7 +21,8 @@ body {
 
 .text-input {
   text-align: center;
-  width: 320px;
+  max-width: 320px;
+  width: 100%;
   padding: 10px 20px;
   font-family: 'PT Serif', serif;
   font-weight: bold;
@@ -399,6 +400,15 @@ body {
   font-size: 10px;
   font-weight: bold;
   text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.footer .producthunt-badge {
+  width: 140px;
+  height: 30px;
+  margin-right: 4px;
 }
 
 .footer.dark {
@@ -415,5 +425,9 @@ body {
   }
   .text-body-2 {
     font-size: 14px;
+  }
+  .footer .producthunt-badge {
+    width: 200px;
+    height: 43px;
   }
 }
