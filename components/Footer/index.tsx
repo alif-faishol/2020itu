@@ -11,6 +11,7 @@ const Footer: FC<FooterType> = ({ theme = 'dark' }) => {
         href="https://www.producthunt.com/posts/2020itu?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-2020itu"
         target="_blank"
         rel="noreferrer"
+        className="hide-when-share"
         style={{ lineHeight: 1 }}
       >
         <img
